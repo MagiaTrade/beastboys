@@ -2,8 +2,8 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#ifndef RAW_STREAMER_H
-#define RAW_STREAMER_H
+#ifndef RAW_RECEIVER_H
+#define RAW_RECEIVER_H
 
 #include "RawSharedState.h"
 
@@ -28,4 +28,4 @@ private:
 }
 }
 
-#endif //RAW_STREAMER_H
+#endif //RAW_RECEIVER_H
