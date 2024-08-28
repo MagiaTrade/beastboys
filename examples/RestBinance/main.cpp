@@ -10,7 +10,7 @@ void signin()
   std::shared_ptr<bb::network::rest::RestApi> api{nullptr};
   api = std::make_shared<bb::network::rest::RestApi>("3000", bb::network::rest::TaskExecutionType::BB_SYNCH, 10000);
 
-  auto jsonString = R"({"email":"leviczios@gmail.com", "password":"Tardatordo3*"})";
+  auto jsonString = R"({"email":"leviczios@gmail.com", "password":"testpassword"})";
 
   if (auto document = mgutils::Json::parse(jsonString))
   {
