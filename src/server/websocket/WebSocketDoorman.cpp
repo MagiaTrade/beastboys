@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 26/02/23.
 //
 
-#include "include/server/websocket/WebSocketDoorman.h"
-#include "include/server/common/ServerState.h"
-#include "include/server/websocket/HttpListener.h"
+#include "WebSocketDoorman.h"
+#include "ServerState.h"
+#include "HttpListener.h"
 #include "Logger.h"
 
 namespace bb::network::server::ws

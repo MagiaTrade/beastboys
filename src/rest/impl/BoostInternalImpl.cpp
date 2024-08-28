@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 17/02/23.
 //
 
-#include "include/rest/impl/BoostInternalImpl.h"
+#include "BoostInternalImpl.h"
 #include "Logger.h"
 
 namespace bb::network::rest

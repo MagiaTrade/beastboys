@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 06/03/23.
 //
 
-#include "include/websocket/Messenger.h"
-#include "include/websocket/impl/Sender.h"
-#include "include/websocket/impl/Stream.h"
+#include "Messenger.h"
+#include "Sender.h"
+#include "Stream.h"
 
 namespace bb{
     Messenger::Messenger(){

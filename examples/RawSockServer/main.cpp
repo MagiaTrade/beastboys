@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 26/07/24.
 //
 #include <iostream>
-#include "include/beastboys"
+#include <beastboys>
 
 int main()
 {

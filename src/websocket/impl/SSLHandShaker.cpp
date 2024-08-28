@@ -2,8 +2,8 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#include "include/websocket/impl/SSLHandShaker.h"
-#include "include/websocket/impl/TargetHandShaker.h"
+#include "SSLHandShaker.h"
+#include "TargetHandShaker.h"
 
 namespace bb {
 namespace network {

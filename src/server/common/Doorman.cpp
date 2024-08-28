@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 26/02/23.
 //
 
-#include "include/server/common/Doorman.h"
-#include "include/server/common/ServerState.h"
-#include "include/server/common/Connection.h"
+#include "Doorman.h"
+#include "ServerState.h"
+#include "Connection.h"
 #include <iostream>
 
 namespace bb::network::server

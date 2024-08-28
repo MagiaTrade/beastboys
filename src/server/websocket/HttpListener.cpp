@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 26/02/23.
 //
 
-#include "include/server/websocket/HttpListener.h"
-#include "include/server/common/ServerState.h"
-#include "include/server/websocket/HandShaker.h"
+#include "HttpListener.h"
+#include "ServerState.h"
+#include "HandShaker.h"
 #include "Logger.h"
 
 //server beast

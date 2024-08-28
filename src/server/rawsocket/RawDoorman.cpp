@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 29/07/24.
 //
 
-#include "include/server/rawsocket/RawDoorman.h"
-#include "include/server/common/ServerState.h"
-#include "include/server/rawsocket/RSConnection.h"
+#include "RawDoorman.h"
+#include "ServerState.h"
+#include "RSConnection.h"
 #include "Logger.h"
 
 namespace bb::network::server::rs

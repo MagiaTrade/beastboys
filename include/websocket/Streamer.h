@@ -5,7 +5,7 @@
 #ifndef BINANCEBEAST_WEBSOCKET_H
 #define BINANCEBEAST_WEBSOCKET_H
 
-#include "include/websocket/common/WebsocketTypes.h"
+#include "WebsocketTypes.h"
 
 namespace bb{
 

@@ -89,11 +89,13 @@ set(BEAST_BOYS_SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/src/rest/RespApi.cpp
 )
 
-set(BEAST_BOYS_INCLUDE_DITS
-  ${CMAKE_CURRENT_SOURCE_DIR}
+set(BEAST_BOYS_INCLUDE_DIRS
   ${CMAKE_CURRENT_SOURCE_DIR}/external
   ${CMAKE_CURRENT_SOURCE_DIR}/external/rapidjson/include
   ${CMAKE_CURRENT_SOURCE_DIR}/fmt/include
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/internal
   ${CMAKE_CURRENT_SOURCE_DIR}/include/common
   ${CMAKE_CURRENT_SOURCE_DIR}/include/websocket
   ${CMAKE_CURRENT_SOURCE_DIR}/include/websocket/common

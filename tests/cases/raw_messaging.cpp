@@ -4,10 +4,10 @@
 //
 // Created by Arthur Motelevicz on 28/07/24.
 //
-#include "include/beastboys"
+#include <beastboys>
 #include <thread>
 #include <string>
-#include "include/server/common/Server.h"
+#include <beastboys>
 #include "catch2/catch.hpp"
 #include "TestHelpers.h"
 

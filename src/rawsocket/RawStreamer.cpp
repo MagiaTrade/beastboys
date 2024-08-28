@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 01/03/23.
 //
 
-#include "include/rawsocketapi/RawStreamer.h"
-#include "include/rawsocketapi/impl/RawSocketImpl.h"
-#include "include/rawsocketapi/impl/RawStream.h"
+#include "RawStreamer.h"
+#include "RawSocketImpl.h"
+#include "RawStream.h"
 
 namespace bb{
 

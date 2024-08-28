@@ -5,7 +5,7 @@
 #ifndef BROKERAPP_NETWORKSETTINGS_H
 #define BROKERAPP_NETWORKSETTINGS_H
 
-#include "beastboys/include/rest/RestApi.h"
+#include <beastboys>
 #include <memory>
 
 

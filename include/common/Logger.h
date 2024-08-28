@@ -5,7 +5,8 @@
 #ifndef BEASTBOYS_LOGGER_H
 #define BEASTBOYS_LOGGER_H
 
-#include "beastboys/mgutils/include/mgutils/Logger.h"
+#include <beastboys>
+#include <mgutils/Logger.h>
 
 #define lg mgutils::Logger::instance().log
 

@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 26/02/23.
 //
 
-#include "include/server/common/Server.h"
+#include "Server.h"
 
 namespace bb::network::server
 {

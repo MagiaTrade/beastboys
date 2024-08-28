@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 16/02/23.
 //
 
-#include "include/rest/impl/ResponseHelper.h"
+#include "ResponseHelper.h"
 #include "Logger.h"
 #include <boost/preprocessor.hpp>
 #include <boost/callable_traits.hpp>

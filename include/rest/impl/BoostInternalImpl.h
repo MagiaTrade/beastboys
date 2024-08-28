@@ -5,7 +5,7 @@
 #ifndef BROKERAPP_BOOSTINTERNALIMPL_H
 #define BROKERAPP_BOOSTINTERNALIMPL_H
 
-#include "beastboys/include/rest/common/NetworkRequestSettings.h"
+#include "NetworkRequestSettings.h"
 #include "ResponseHelper.h"
 
 #include <boost/beast.hpp>

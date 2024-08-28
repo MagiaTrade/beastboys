@@ -5,7 +5,7 @@
 #ifndef BEAST_BOYS_MESSENGER_H
 #define BEAST_BOYS_MESSENGER_H
 
-#include "include/websocket/common/WebsocketTypes.h"
+#include "WebsocketTypes.h"
 #include <queue>
 namespace bb{
 

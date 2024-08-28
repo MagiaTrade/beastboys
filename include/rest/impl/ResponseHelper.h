@@ -5,9 +5,9 @@
 #ifndef BEASTBOYS_RESPONSEHELPER_H
 #define BEASTBOYS_RESPONSEHELPER_H
 
-#include "beastboys/mgutils/include/mgutils/Json.h"
+#include "mgutils/Json.h"
 #include <memory>
-#include "beastboys/include/rest/common/NetworkTypes.h"
+#include "NetworkTypes.h"
 
 #define __STRINGIZE_I(x) #x
 #define __STRINGIZE(x) __STRINGIZE_I(x)

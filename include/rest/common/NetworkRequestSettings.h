@@ -5,7 +5,7 @@
 #ifndef BEASTBOYS_NETWORKREQUESTSETTINGS_H
 #define BEASTBOYS_NETWORKREQUESTSETTINGS_H
 
-#include "beastboys/mgutils/include/mgutils/Json.h"
+#include "Json.h"
 #include <string>
 #include "NetworkTypes.h"
 #include <map>

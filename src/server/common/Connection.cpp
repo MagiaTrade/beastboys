@@ -2,8 +2,8 @@
 //// Created by Arthur Motelevicz on 29/07/24.
 ////
 //
-#include "include/server/common/Connection.h"
-#include "include/server/common/ServerState.h"
+#include "Connection.h"
+#include "ServerState.h"
 //#include "Logger.h"
 //
 //#define BUFFER_SIZE 2048

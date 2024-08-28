@@ -7,7 +7,7 @@
 
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
-#include "include/server/common/Doorman.h"
+#include "Doorman.h"
 
 namespace bb::network::server::ws
 {

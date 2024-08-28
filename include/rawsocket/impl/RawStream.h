@@ -6,7 +6,7 @@
 #define RAW_STREAM_H
 
 #include <boost/asio.hpp>
-#include "include/rawsocketapi/common/RawSocketTypes.h"
+#include "RawSocketTypes.h"
 
 namespace bb::network::rs
 {

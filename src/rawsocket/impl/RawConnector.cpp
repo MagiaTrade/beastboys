@@ -2,8 +2,8 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#include "include/rawsocketapi/impl/RawConnector.h"
-#include "include/rawsocketapi/impl/RawReceiver.h"
+#include "RawConnector.h"
+#include "RawReceiver.h"
 
 namespace bb {
 namespace network {

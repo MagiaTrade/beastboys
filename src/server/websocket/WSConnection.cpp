@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 29/07/24.
 //
 
-#include "include/server/websocket/WSConnection.h"
+#include "WSConnection.h"
 #include "Logger.h"
-#include "include/server/common/ServerState.h"
+#include "ServerState.h"
 
 namespace bb::network::server::ws
 {

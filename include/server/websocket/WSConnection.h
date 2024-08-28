@@ -7,7 +7,7 @@
 
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
-#include "include/server/common/Connection.h"
+#include "Connection.h"
 
 namespace bb::network::server
 {

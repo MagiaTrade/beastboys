@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#include "include/rawsocketapi/impl/RawSharedState.h"
+#include "RawSharedState.h"
 
 namespace bb {
 namespace network {

@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#include "include/rawsocketapi/impl/RawStream.h"
+#include "RawStream.h"
 #include <iostream>
 #include <utility>
 #include "Logger.h"

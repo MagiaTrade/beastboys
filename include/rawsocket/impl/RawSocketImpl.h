@@ -10,7 +10,7 @@
 #include <boost/beast.hpp>
 #include <boost/asio/ssl.hpp>
 #include <boost/beast.hpp>
-#include "include/rawsocketapi/common/RawSocketTypes.h"
+#include "RawSocketTypes.h"
 
 namespace bb{
 namespace network{

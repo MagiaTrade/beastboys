@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#include "include/websocket/impl/Connector.h"
-#include "include/websocket/impl/SSLHandShaker.h"
-#include "include/websocket/impl/TargetHandShaker.h"
+#include "Connector.h"
+#include "SSLHandShaker.h"
+#include "TargetHandShaker.h"
 #include <openssl/ssl.h>
 
 namespace bb {

@@ -5,7 +5,7 @@
 #ifndef BEAST_BOYS_TESTHELPERS_H
 #define BEAST_BOYS_TESTHELPERS_H
 
-#include "include/beastboys"
+#include <beastboys>
 #include <string>
 #include <mgutils/ErrorManager.h>
 

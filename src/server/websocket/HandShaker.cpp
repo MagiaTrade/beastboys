@@ -2,10 +2,10 @@
 // Created by Arthur Motelevicz on 29/07/24.
 //
 
-#include "include/server/websocket/HandShaker.h"
-#include "include/server/common/ServerState.h"
+#include "HandShaker.h"
+#include "ServerState.h"
 #include "Logger.h"
-#include "include/server/websocket/WSConnection.h"
+#include "WSConnection.h"
 
 namespace bb::network::server::ws
 {

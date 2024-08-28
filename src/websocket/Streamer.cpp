@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 01/03/23.
 //
 
-#include "include/websocket/Streamer.h"
-#include "include/websocket/impl/WebsocketImpl.h"
-#include "include/websocket/impl/Stream.h"
+#include "Streamer.h"
+#include "WebsocketImpl.h"
+#include "Stream.h"
 
 namespace bb{
 

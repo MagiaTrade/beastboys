@@ -40,15 +40,15 @@
 //    startContext();
 //}
 
-#include "include/websocket/impl/WebsocketImpl.h"
+#include "WebsocketImpl.h"
 #include <iostream>
-#include "include/websocket/impl/SharedState.h"
-#include "include/websocket/impl/Stream.h"
-#include "include/websocket/impl/Resolver.h"
+#include "SharedState.h"
+#include "Stream.h"
+#include "Resolver.h"
 #ifdef __APPLE__
 #include <pthread.h>
 #endif
-#include "beastboys/include/common/cacert_data.h"
+#include "cacert_data.h"
 
 namespace bb::network::ws
   {

@@ -6,7 +6,7 @@
 #define BEAST_BOYS_RSCONNECTION_H
 
 #include <boost/asio.hpp>
-#include "include/server/common/Connection.h"
+#include "Connection.h"
 
 namespace bb::network::server
 {

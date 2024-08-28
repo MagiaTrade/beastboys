@@ -2,9 +2,9 @@
 // Created by Arthur Motelevicz on 26/02/23.
 //
 
-#include "include/server/common/ServerState.h"
-#include "include/server/common/Client.h"
-#include "include/server/common/Connection.h"
+#include "ServerState.h"
+#include "Client.h"
+#include "Connection.h"
 #include "Logger.h"
 
 namespace bb::network::server

@@ -2,8 +2,8 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#include "include/rawsocketapi/impl/RawResolver.h"
-#include "include/rawsocketapi/impl/RawConnector.h"
+#include "RawResolver.h"
+#include "RawConnector.h"
 
 namespace bb {
 namespace network {

@@ -2,11 +2,11 @@
 // Created by Arthur Motelevicz on 01/03/23.
 //
 
-#include "include/rawsocketapi/impl/RawSocketImpl.h"
+#include "RawSocketImpl.h"
 #include <iostream>
-#include "include/rawsocketapi/impl/RawSharedState.h"
-#include "include/rawsocketapi/impl/RawStream.h"
-#include "include/rawsocketapi/impl/RawResolver.h"
+#include "RawSharedState.h"
+#include "RawStream.h"
+#include "RawResolver.h"
 
 #ifdef __APPLE__
 #include <pthread.h>

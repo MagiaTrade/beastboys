@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 01/03/23.
 //
 
-#include "include/websocket/common/WebsocketResponse.h"
+#include "WebsocketResponse.h"
 
 namespace bb {
 namespace network {

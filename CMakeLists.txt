@@ -34,7 +34,7 @@ else()
 endif()
 
 target_include_directories(${PROJECT_NAME} PUBLIC
-    ${BEAST_BOYS_FOLDERS}
+    ${BEAST_BOYS_INCLUDE_DIRS}
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC

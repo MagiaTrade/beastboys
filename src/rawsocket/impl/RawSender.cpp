@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 06/03/23.
 //
 
-#include "include/rawsocketapi/impl/RawSender.h"
+#include "RawSender.h"
 
 namespace bb {
 namespace network {

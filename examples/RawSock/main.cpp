@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 24/07/24.
 //
 #include <iostream>
-#include "include/beastboys"
+#include <beastboys>
 
 void localHostStream();
 

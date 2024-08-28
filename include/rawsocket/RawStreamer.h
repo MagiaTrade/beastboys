@@ -5,7 +5,7 @@
 #ifndef RAW_STREAMER_H
 #define RAW_STREAMER_H
 
-#include "beastboys/include/rawsocketapi/common/RawSocketTypes.h"
+#include <beastboys>
 
 namespace bb
 {

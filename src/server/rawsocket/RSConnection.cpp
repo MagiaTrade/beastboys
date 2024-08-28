@@ -2,10 +2,10 @@
 // Created by Arthur Motelevicz on 29/07/24.
 //
 
-#include "include/server/rawsocket/RSConnection.h"
+#include "RSConnection.h"
 
 #include <utility>
-#include "include/server/common/ServerState.h"
+#include "ServerState.h"
 #include "Logger.h"
 
 #define BUFFER_SIZE 2048

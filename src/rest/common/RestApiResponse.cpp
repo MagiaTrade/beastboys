@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 16/02/23.
 //
 
-#include "include/rest/common/RestApiResponse.h"
+#include "RestApiResponse.h"
 namespace bb::network::rest
 {
   NetworkResponse::NetworkResponse(const std::string &msg, int http_result_code_value):

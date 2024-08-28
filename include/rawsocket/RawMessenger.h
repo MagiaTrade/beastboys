@@ -5,7 +5,7 @@
 #ifndef RAW_MESSENGER_H
 #define RAW_MESSENGER_H
 
-#include "beastboys/include/rawsocketapi/common/RawSocketTypes.h"
+#include "RawSocketTypes.h"
 #include <queue>
 
 namespace bb

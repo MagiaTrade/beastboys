@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 01/03/23.
 //
 
-#include "include/rawsocketapi/common/RawSocketResponse.h"
+#include "RawSocketResponse.h"
 
 namespace bb {
 namespace network {

@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#include "include/websocket/impl/Receiver.h"
+#include "Receiver.h"
 
 namespace bb {
 namespace network {

@@ -6,8 +6,8 @@
 #define BEASTBOYS_RESTAPI_H
 
 #include <string>
-#include "beastboys/include/rest/common/NetworkTypes.h"
-#include "beastboys/include/rest/impl/BoostInternalImpl.h"
+#include "NetworkTypes.h"
+#include "BoostInternalImpl.h"
 
 namespace bb::network::rest
 {

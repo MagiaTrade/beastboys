@@ -2,8 +2,8 @@
 // Created by Arthur Motelevicz on 01/03/23.
 //
 
-#include "include/rest/RestApi.h"
-#include "include/rest/impl/BoostInternalImpl.h"
+#include "RestApi.h"
+#include "BoostInternalImpl.h"
 #include <boost/asio.hpp>
 #include "Logger.h"
 

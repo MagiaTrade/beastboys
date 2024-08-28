@@ -2,7 +2,7 @@
 // Created by Arthur Motelevicz on 16/02/23.
 //
 
-#include "include/rest/common/NetworkRequestSettings.h"
+#include "NetworkRequestSettings.h"
 
 namespace bb::network::rest
 {

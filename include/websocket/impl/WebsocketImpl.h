@@ -10,7 +10,7 @@
 #include <boost/beast.hpp>
 #include <boost/asio/ssl.hpp>
 #include <boost/beast.hpp>
-#include "include/websocket/common/WebsocketTypes.h"
+#include "WebsocketTypes.h"
 
 namespace bb{
 namespace network{

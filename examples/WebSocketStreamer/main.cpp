@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "include/beastboys"
+#include <beastboys>
 
 int main()
 {

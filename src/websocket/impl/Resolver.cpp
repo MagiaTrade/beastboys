@@ -2,8 +2,8 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#include "include/websocket/impl/Resolver.h"
-#include "include/websocket/impl/Connector.h"
+#include "Resolver.h"
+#include "Connector.h"
 
 namespace bb {
 namespace network {
