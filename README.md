@@ -66,10 +66,6 @@ The test files included in this repository serve as living documentation. They p
 
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-## License
-
-Beastboys is licensed under the MIT License. See `LICENSE` for more information.
-
 ## Authors
 
 * **Tato Levicz** - [@tatolevicz](https://github.com/tatolevicz)
