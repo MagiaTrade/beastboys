@@ -18,7 +18,8 @@ include(cmake/beast_boys.cmake)
 include(cmake/generate_cacert_data.cmake)
 
 add_library(${PROJECT_NAME} STATIC
-    ${BEAST_BOYS_FILES}
+    ${BEAST_BOYS_HEADERS}
+    ${BEAST_BOYS_SRCS}
 )
 
 set(OPENSSL_USE_STATIC_LIBS TRUE)
@@ -44,14 +45,14 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 
 # SETUP EXAMPLES | TESTS -----------------------------------
 if (${BUILD_BB_EXAMPLES})
-    add_subdirectory(Examples/WebSocketStreamer)
-    add_subdirectory(Examples/RestBinance)
-    add_subdirectory(Examples/RawSocketMessenger)
-    add_subdirectory(Examples/RawSock)
-    add_subdirectory(Examples/RawSockServer)
+    add_subdirectory(examples/WebSocketStreamer)
+    add_subdirectory(examples/RestBinance)
+    add_subdirectory(examples/RawSocketMessenger)
+    add_subdirectory(examples/RawSock)
+    add_subdirectory(examples/RawSockServer)
 endif()
 
 if (${BUILD_BB_TESTS})
-    add_subdirectory(Tests)
+    add_subdirectory(tests)
 endif()
 # ----------------------------------------------------------
