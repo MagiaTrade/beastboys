@@ -15,6 +15,7 @@
 #include "RawDoorman.h"
 #include "WebSocketDoorman.h"
 #include "Streamer.h"
+#include "Stream.h"
 #include "RawStreamer.h"
 #include "RawMessenger.h"
 #include "Messenger.h"

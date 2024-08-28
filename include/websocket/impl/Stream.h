@@ -2,8 +2,8 @@
 // Created by Arthur Motelevicz on 04/03/23.
 //
 
-#ifndef BINANCEBEAST_STREAM_H
-#define BINANCEBEAST_STREAM_H
+#ifndef STREAM_H
+#define STREAM_H
 
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
@@ -85,4 +85,4 @@ namespace bb::network::ws
 
 }
 
-#endif //BINANCEBEAST_STREAM_H
+#endif //STREAM_H
