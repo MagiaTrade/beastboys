@@ -1,0 +1,7 @@
+cmake-build-debug
+build_tests
+*.xml
+*.iml
+*.idea
+external
+.DS_Store
