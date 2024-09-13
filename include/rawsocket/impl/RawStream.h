@@ -40,7 +40,7 @@ namespace bb::network::rs
     void feedData(const std::string& data);
     void feedData(const char* data, size_t length);
     void connectionAborted(boost::system::error_code ec);
-    void stop();
+    void stop(const FinishCallback& cb = nullptr);
     void stopWithCloseCallbackTriggered();
 
     //should be at max 125 bytes
@@ -55,7 +55,7 @@ namespace bb::network::rs
     char getReadUntilDelimiter() const;
 
   private:
-    void internalStop();
+    void internalStop(const FinishCallback& cb);
     inline static uint32_t id = 0;
     std::shared_ptr<boost::asio::ip::tcp::socket> _socket{nullptr};
 

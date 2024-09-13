@@ -91,7 +91,7 @@ void Stream::connectionAborted(boost::system::error_code ec){
     _cb(false, ec.message(), shared_from_this());
 }
 
-void Stream::internalStop()
+void Stream::internalStop(const FinishCallback& cb)
 {
   if (_socket && _socket->is_open())
   {
@@ -101,7 +101,7 @@ void Stream::internalStop()
 //    });
 
     boost::asio::post(_socket->get_executor(),
-    [this]()
+    [this, cb]()
     {
       boost::system::error_code ec;
 
@@ -118,13 +118,16 @@ void Stream::internalStop()
         return;
 
       lg(mgutils::Info)<< "Stream " << id << " stopped by user!\n";
+
+      if(cb)
+        cb();
     });
   }
 }
 
-void Stream::stop() {
+void Stream::stop(const FinishCallback& cb) {
   _wasClosedByClient = true;
-  internalStop();
+  internalStop(cb);
 }
 
 void Stream::stopWithCloseCallbackTriggered() {
