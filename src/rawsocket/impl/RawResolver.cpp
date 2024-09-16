@@ -30,7 +30,7 @@ void Resolver::onResolve(boost::system::error_code ec, boost::asio::ip::tcp::res
 void Resolver::run(){
     _resolver.async_resolve(_stream->host(),
                             _stream->port(),
-    [&, self = shared_from_this()](boost::system::error_code ec,
+    [self = shared_from_this()](boost::system::error_code ec,
                                 boost::asio::ip::tcp::resolver::results_type res)
     {
         self->onResolve(ec, std::move(res));

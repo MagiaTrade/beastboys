@@ -45,7 +45,7 @@ void Receiver::onReceive(boost::system::error_code ec, std::size_t) {
 void Receiver::run(){
     if(_stream->usesSSL()){
         _stream->getSocketSSL().async_read(_buffer,
-                [&, self = shared_from_this()](boost::system::error_code ec, std::size_t bytes){
+                [self = shared_from_this()](boost::system::error_code ec, std::size_t bytes){
                     self->onReceive(ec, bytes);
                 }
         );
@@ -53,7 +53,7 @@ void Receiver::run(){
     }
 
     _stream->getSocket().async_read(_buffer,
-          [&, self = shared_from_this()](boost::system::error_code ec, std::size_t bytes){
+          [self = shared_from_this()](boost::system::error_code ec, std::size_t bytes){
               self->onReceive(ec, bytes);
           }
     );

@@ -34,14 +34,14 @@ void Sender::send(const std::string& message, SendMessageCB cb){
     _cb = std::move(cb);
     if(_stream->usesSSL()){
         _stream->getSocketSSL().async_write(boost::asio::buffer(message),
-        [&, self = shared_from_this()](boost::system::error_code ec, std::size_t bytes) {
+        [self = shared_from_this()](boost::system::error_code ec, std::size_t bytes) {
            self->onSend(ec, bytes);
         });
         return;
     }
 
     _stream->getSocket().async_write(boost::asio::buffer(message),
-    [&, self = shared_from_this()](boost::system::error_code ec, std::size_t bytes){
+    [self = shared_from_this()](boost::system::error_code ec, std::size_t bytes){
         self->onSend(ec, bytes);
     });
 }
