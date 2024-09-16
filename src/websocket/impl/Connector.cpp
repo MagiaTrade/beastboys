@@ -50,7 +50,7 @@ void Connector::run(const boost::asio::ip::tcp::resolver::results_type& results)
         boost::asio::async_connect(_stream->getSocketSSL().next_layer().next_layer(),
         results.begin(),
         results.end(),
-        [self = shared_from_this()](
+       [&, self = shared_from_this()](
                 boost::system::error_code ec,
                 boost::asio::ip::tcp::resolver::iterator it) {
             self->onConnect(ec, std::move(it));
@@ -61,7 +61,7 @@ void Connector::run(const boost::asio::ip::tcp::resolver::results_type& results)
     boost::asio::async_connect(_stream->getSocket().next_layer(),
                                results.begin(),
                                results.end(),
-    [self = shared_from_this()](
+    [&, self = shared_from_this()](
             boost::system::error_code ec,
             boost::asio::ip::tcp::resolver::iterator it) {
         self->onConnect(ec, std::move(it));

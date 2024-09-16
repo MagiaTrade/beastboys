@@ -29,7 +29,7 @@ void SSLHandShaker::onHandShake(boost::system::error_code ec) {
 void SSLHandShaker::run(){
     _stream->getSocketSSL().next_layer().async_handshake(
             boost::asio::ssl::stream_base::client,
-            [self = shared_from_this()](boost::system::error_code ec){
+            [&, self = shared_from_this()](boost::system::error_code ec){
                 self->onHandShake(ec);
             }
     );

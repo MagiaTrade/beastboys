@@ -78,7 +78,7 @@ void Receiver::onReceive(boost::system::error_code ec, std::size_t bytes)
       {
         // Use async_read_until com o delimitador definido
         boost::asio::async_read_until(socket, _buffer, _stream->getReadUntilDelimiter(),
-        [self = shared_from_this()](boost::system::error_code ec, std::size_t bytes)
+        [&,self = shared_from_this()](boost::system::error_code ec, std::size_t bytes)
         {
           self->onReceive(ec, bytes);
         });

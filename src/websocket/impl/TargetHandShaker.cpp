@@ -45,7 +45,7 @@ void TargetHandShaker::run(){
     _stream->getSocket().async_handshake(
             _stream->host(),
             _stream->target(),
-            [self = shared_from_this()](boost::system::error_code ec) {
+            [&, self = shared_from_this()](boost::system::error_code ec) {
                 self->onHandShake(ec);
             }
     );
