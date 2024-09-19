@@ -7,6 +7,7 @@
 
 #include "RawSocketTypes.h"
 #include <queue>
+#include <mutex>
 
 namespace bb
 {
