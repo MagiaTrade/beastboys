@@ -95,4 +95,20 @@ set(BEAST_BOYS_INCLUDE_DIRS
   ${CMAKE_CURRENT_SOURCE_DIR}/fmt/include
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/internal
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/common
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/websocket
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/websocket/common
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/websocket/impl
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/rest
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/rest/common
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/rest/impl
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/server/rawsocket
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/rawsocket
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/rawsocket/common
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/rawsocket/impl
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/server
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/server/common
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/server/rawsocket
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/server/websocket
 )
