@@ -6,6 +6,7 @@
 #define RAWSOCKETTYPES_H
 
 #include <boost/variant.hpp>
+#include <memory>
 #include "RawSocketResponse.h"
 
 namespace bb::network::rs {
