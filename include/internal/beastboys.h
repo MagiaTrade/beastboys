@@ -21,7 +21,7 @@
 #include "websocket/Messenger.h"
 #include "rawsocket/impl/RawStream.h"
 #include "rest/RestApi.h"
-#include "rest/common/NetworkRequestSettings.h"
+#include "NetworkRequestSettings.h"
 #include "common/CryptoHelper.h"
 #include "server/common/Server.h"
 #include "common/Logger.h"
