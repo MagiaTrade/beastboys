@@ -95,7 +95,7 @@ public:
         std::make_shared<invoker_type>(std::move(cb))
       };
 
-      std::lock_guard<std::mutex> lg(_insertItemMutex);
+      std::lock_guard<std::mutex> lock(_insertItemMutex);
 
       m_async_requests.push(std::move(item));
 
