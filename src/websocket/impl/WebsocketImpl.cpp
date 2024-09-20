@@ -48,7 +48,7 @@
 #ifdef __APPLE__
 #include <pthread.h>
 #endif
-#include "cacert_data.h"
+#include "common/cacert_data.h"
 
 namespace bb::network::ws
   {

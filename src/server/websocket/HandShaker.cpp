@@ -4,7 +4,7 @@
 
 #include "HandShaker.h"
 #include "ServerState.h"
-#include "Logger.h"
+#include "common/Logger.h"
 #include "WSConnection.h"
 
 namespace bb::network::server::ws

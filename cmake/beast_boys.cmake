@@ -96,7 +96,6 @@ set(BEAST_BOYS_INCLUDE_DIRS
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_SOURCE_DIR}/include/internal
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/common
   ${CMAKE_CURRENT_SOURCE_DIR}/include/websocket
   ${CMAKE_CURRENT_SOURCE_DIR}/include/websocket/common
   ${CMAKE_CURRENT_SOURCE_DIR}/include/websocket/impl

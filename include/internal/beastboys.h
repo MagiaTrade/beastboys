@@ -20,13 +20,13 @@
 #include "RawMessenger.h"
 #include "Messenger.h"
 #include "RestApi.h"
-#include "CryptoHelper.h"
+#include "common/CryptoHelper.h"
 #include "RawStream.h"
 #include "RestApi.h"
 #include "NetworkRequestSettings.h"
-#include "CryptoHelper.h"
+#include "common/CryptoHelper.h"
 #include "Server.h"
-#include "Logger.h"
+#include "common/Logger.h"
 
 
 #endif //BEAST_BOYS_BEASTBOYS_H

@@ -1,7 +1,7 @@
 //
 // Created by Opala Studios on 26/09/23.
 //
-#include "CryptoHelper.h"
+#include "common/CryptoHelper.h"
 #include <openssl/hmac.h>
 #include <openssl/evp.h>
 #include <openssl/aes.h>

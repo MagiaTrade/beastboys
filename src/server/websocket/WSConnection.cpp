@@ -3,7 +3,7 @@
 //
 
 #include "WSConnection.h"
-#include "Logger.h"
+#include "common/Logger.h"
 #include "ServerState.h"
 
 namespace bb::network::server::ws

@@ -5,7 +5,7 @@
 #include "RestApi.h"
 #include "BoostInternalImpl.h"
 #include <boost/asio.hpp>
-#include "Logger.h"
+#include "common/Logger.h"
 
 #ifdef __APPLE__
   #include <pthread.h>

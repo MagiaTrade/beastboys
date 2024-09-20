@@ -4,7 +4,7 @@
 
 #include "Stream.h"
 #include <iostream>
-#include "Logger.h"
+#include "common/Logger.h"
 
 namespace bb::network::ws {
 
