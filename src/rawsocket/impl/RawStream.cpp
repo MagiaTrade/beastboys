@@ -89,6 +89,9 @@ void Stream::feedData(const char* data, size_t length)
 void Stream::connectionAborted(boost::system::error_code ec){
   if(_cb)
     _cb(false, ec.message(), shared_from_this());
+
+  if(_cb2)
+    _cb2(false, ec.message().data(), ec.message().size(), shared_from_this());
 }
 
 void Stream::internalStop(const FinishCallback& cb)
