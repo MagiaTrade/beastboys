@@ -34,7 +34,7 @@ void Connector::onConnect(boost::system::error_code ec, boost::asio::ip::tcp::re
                     static_cast<int>(::ERR_get_error()), boost::asio::error::get_ssl_category()
             );
 
-            LOG_ERROR("SSL_set_tlsext_host_name error: " + error_code.message());
+            logE << "SSL_set_tlsext_host_name error: " << error_code.message();
             return;
         }
 

@@ -4,7 +4,7 @@
 
 #include "Stream.h"
 #include <iostream>
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 
 namespace bb::network::ws {
 
@@ -103,7 +103,7 @@ void Stream::internalStop(){
         if(_socketSSL->is_open()) {
             _socketSSL->async_close(boost::beast::websocket::close_code::normal, [&](boost::system::error_code ec) {
                 if(_wasClosedByServer) return;
-              lg(mgutils::Info) << "Stream " << id << " stopped by user!\n";
+              logI << "Stream " << id << " stopped by user!\n";
             });
         }
 
@@ -113,7 +113,7 @@ void Stream::internalStop(){
     if(_socket->is_open()) {
         _socket->async_close(boost::beast::websocket::close_code::normal, [&](boost::system::error_code ec) {
             if(_wasClosedByServer) return;
-          lg(mgutils::Info) << "Stream " << id << " stopped by user!\n";
+          logI << "Stream " << id << " stopped by user!\n";
         });
     }
 }
@@ -143,7 +143,7 @@ void Stream::ping(const std::string& payload) {
 }
 
 Stream::~Stream(){
-  lg(mgutils::Debug) << "Destructor stream!";
+  logD << "Destructor stream!";
 }
 
 void Stream::setWatchControlMessages() {

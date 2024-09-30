@@ -13,12 +13,12 @@ int main()
     [](bool success, const std::string& data, auto stream){
         if(!success)
         {
-          lg(mgutils::Info) << "Stream1 closed with msg: " << data << "\n\n";
+          logI << "Stream1 closed with msg: " << data;
             return;
         }
 
         //Work with your streamed data here
-      lg(mgutils::Info) << data;
+      logI << data;
     });
 
 
@@ -29,7 +29,7 @@ int main()
     {
         // Do other stuff while the data is coming in callback
         std::this_thread::sleep_for(std::chrono::seconds(3));
-//        lg(mgutils::Info) << "\nWorking.. \n";
+//        logI << "\nWorking.. ";
 
 
         if(!sent)
@@ -39,9 +39,9 @@ int main()
              [](bool success)
              {
                if (success)
-                   lg(mgutils::Info) << "Msg enviada com sucesso!";
+                 logI << "Msg enviada com sucesso!";
                  else
-                 lg(mgutils::Error) << "Msg nao enviada!\n";
+                 logE << "Msg nao enviada!";
              });
 
             sent = true;

@@ -5,7 +5,7 @@
 #include "RawStream.h"
 #include <iostream>
 #include <utility>
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 
 namespace bb::network::rs
 {
@@ -100,7 +100,7 @@ void Stream::internalStop(const FinishCallback& cb)
   {
 //    _socket->async_close(boost::beast::websocket::close_code::normal, [&](boost::system::error_code ec) {
 //        if(_wasClosedByServer) return;
-//        lg(mgutils::Info) << "Stream " << id << " stopped by user!\n";
+//        logI << "Stream " << id << " stopped by user!\n";
 //    });
 
     boost::asio::post(_socket->get_executor(),
@@ -120,7 +120,7 @@ void Stream::internalStop(const FinishCallback& cb)
       if(_wasClosedByServer)
         return;
 
-      lg(mgutils::Info)<< "Stream " << id << " stopped by user!\n";
+      logI << "Stream " << id << " stopped by user!";
 
       if(cb)
         cb();
@@ -150,7 +150,7 @@ void Stream::stopWithCloseCallbackTriggered() {
 
 Stream::~Stream()
 {
-  lg(mgutils::Debug) << "Destructor stream!";
+  logI << "Destructor stream!";
 }
 
 

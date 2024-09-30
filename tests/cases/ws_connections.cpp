@@ -91,7 +91,7 @@ TEST_CASE("WebSocket Connection Tests", "[websocket]")
     auto streamPtr = stream.lock();
     if (!streamPtr)
     {
-      lg(mgutils::Error) << "Failed to lock stream.";
+      logE << "Failed to lock stream.";
       REQUIRE(false);
     }
 
@@ -148,7 +148,7 @@ TEST_CASE("WebSocket SSL Tests", "[websocket][ssl]")
     auto stream = streamer->openStream("ws.ifelse.io", "443", "", true,  // 'true' for SSL
      [&](bool success, const std::string &data, const auto &stream) {
        if (!success) {
-         LOG_ERROR("Stream closed with msg: " + data);
+         logE << ("Stream closed with msg: " + data);
          return;
        }
 
@@ -156,7 +156,7 @@ TEST_CASE("WebSocket SSL Tests", "[websocket][ssl]")
         receivePromise.set_value(data);
 
        skippedFirst = true;
-       LOG_INFO(data);
+       logI << data;
      });
 
     std::this_thread::sleep_for(std::chrono::seconds(1)); // Tempo para o stream ser aberto
@@ -183,7 +183,7 @@ TEST_CASE("WebSocket SSL Tests", "[websocket][ssl]")
         bool success = sendFuture.get();
         REQUIRE(success);
       } else {
-        LOG_ERROR("Timeout waiting for sendMessage callback.");
+        logE << ("Timeout waiting for sendMessage callback.");
         REQUIRE(false); // Forçar falha no teste em caso de timeout
       }
 
@@ -192,11 +192,11 @@ TEST_CASE("WebSocket SSL Tests", "[websocket][ssl]")
         std::string receivedMsg = receiveFuture.get();
         REQUIRE(receivedMsg == testMessage);
       } else {
-        LOG_ERROR("Timeout waiting for message from WebSocket server.");
+        logE << ("Timeout waiting for message from WebSocket server.");
         REQUIRE(false); // Forçar falha no teste em caso de timeout
       }
     } else {
-      LOG_ERROR("Failed to lock stream.");
+      logE << ("Failed to lock stream.");
       REQUIRE(false); // Forçar falha no teste se o stream não for válido
     }
 

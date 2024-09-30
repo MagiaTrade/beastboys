@@ -3,7 +3,7 @@
 //
 
 #include "WSConnection.h"
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 #include "ServerState.h"
 
 namespace bb::network::server::ws
@@ -26,7 +26,7 @@ namespace bb::network::server::ws
     if (bytes > 0)
     {
       std::string message = boost::beast::buffers_to_string(_buffer.data());
-      LOG_INFO(message);
+      logI << message;
       _buffer.consume(bytes);
       _serverState->send(message);
     }

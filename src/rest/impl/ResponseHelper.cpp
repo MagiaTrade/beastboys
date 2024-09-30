@@ -3,7 +3,7 @@
 //
 
 #include "ResponseHelper.h"
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 #include <boost/preprocessor.hpp>
 #include <boost/callable_traits.hpp>
 #include <boost/beast/version.hpp>
@@ -41,7 +41,7 @@ namespace bb::network::rest
       return std::make_pair(ec, std::move(msg));
 
     } catch (const std::bad_optional_access& e) {
-      LOG_ERROR(std::string("Error: Missing value in JSON. Exception: ") + e.what());
+      logE << "Error: Missing value in JSON. Exception: " <<  e.what();
     }
 
     return std::make_pair(-1,"");

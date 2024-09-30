@@ -5,7 +5,7 @@
 #include "ServerState.h"
 #include "Client.h"
 #include "Connection.h"
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 
 namespace bb::network::server
 {
@@ -51,7 +51,7 @@ namespace bb::network::server
   ServerState::~ServerState()
   {
     if(!_clients.empty())
-      lg(mgutils::Error) << "Clients not empty on ServerState destructor!\n";
+      logE << "Clients not empty on ServerState destructor!";
   }
 
 }

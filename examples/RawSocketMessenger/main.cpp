@@ -12,13 +12,13 @@ std::shared_ptr< bb::network::rs::Stream> createRawStream(const std::shared_ptr<
   auto stream = streamer->openStream("datafeed1.cedrotech.com","81","",
   [](bool success, const std::string& data, auto stream){
     if(!success) {
-      lg(mgutils::Info)<< "Stream1 closed with msg: " << data << "\n\n";
+      logI << "Stream1 closed with msg: " << data;
       //here in the client you can reschedule a reconnection routine
       return;
     }
 
     //Work with your streamed data here
-    lg(mgutils::Info)<< data;
+    logI << data;
   });
 
   return std::move(stream.lock());
@@ -29,7 +29,7 @@ void rawStream(){
 
   auto stream = createRawStream(streamer);
   std::function<void(RawSharedStream)> closeCB = [&](RawSharedStream closedStream){
-    lg(mgutils::Info) << "Stream CLOSE CB!!! \n";
+    logI << "Stream CLOSE CB!!!";
     stream = createRawStream(streamer);
     stream->setCloseStreamCallback(closeCB);
   };
@@ -56,12 +56,12 @@ int main()
   [](bool success, const std::string& data, auto stream)
   {
     if(!success) {
-      lg(mgutils::Info) << "Stream1 closed with msg: " << data << "\n\n";
+      logI << "Stream1 closed with msg: " << data;
       return;
     }
 
     //Work with your streamed data here
-    lg(mgutils::Info) << data << "\n\n";
+    logI << data;
   });
 
 
@@ -71,7 +71,7 @@ int main()
   while(stream.lock()){
     // Do other stuff while the data is coming in callback
     std::this_thread::sleep_for(std::chrono::seconds(1));
-//        lg(mgutils::Info) << "\nWorking.. \n";
+//        logI << "\nWorking.. \n";
 
 //    if(!sent)
 //    {
@@ -79,9 +79,9 @@ int main()
 //     "{\n\"method\": \"SUBSCRIBE\",\n\"params\":\n[\n\"btcusdt@trade\"\n],\n\"id\": 1\n}",
 //     [](bool success) {
 //       if (success)
-//         lg(mgutils::Info) << "Msg enviada com sucesso!\n";
+//         logI << "Msg enviada com sucesso!\n";
 //       else
-//         lg(mgutils::Error) << "Msg nao enviada!\n";
+//         logE << "Msg nao enviada!\n";
 //     });
 //
 //      sent = true;
@@ -93,9 +93,9 @@ int main()
      "Oi amigao!",
      [](bool success) {
        if (success)
-         lg(mgutils::Info) << "Msg enviada com sucesso!\n";
+         logI << "Msg enviada com sucesso!";
        else
-         lg(mgutils::Info) << "Msg nao enviada!\n";
+         logI << "Msg nao enviada!";
      });
 
       sent = true;

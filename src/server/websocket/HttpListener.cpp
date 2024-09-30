@@ -5,7 +5,7 @@
 #include "HttpListener.h"
 #include "ServerState.h"
 #include "HandShaker.h"
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 
 //server beast
 namespace bb::network::server::ws

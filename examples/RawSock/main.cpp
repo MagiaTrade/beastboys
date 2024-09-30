@@ -12,13 +12,13 @@ std::shared_ptr< bb::network::rs::Stream> createRawStream(const std::shared_ptr<
   auto stream = streamer->openStream("datafeed1.cedrotech.com","81","",
   [](bool success, const std::string& data, auto stream){
     if(!success) {
-      lg(mgutils::Info) << "Stream1 closed with msg: " << data << "\n\n";
+      logI << "Stream1 closed with msg: " << data << "\n\n";
       //here in the client you can reschedule a reconnection routine
       return;
     }
 
     //Work with your streamed data here
-    lg(mgutils::Info) << data;
+    logI << data;
   });
 
   return std::move(stream.lock());
@@ -29,7 +29,7 @@ void rawStream(){
 
   auto stream = createRawStream(streamer);
   std::function<void(RawSharedStream)> closeCB = [&](RawSharedStream closedStream){
-    lg(mgutils::Info) << "Stream CLOSE CB!!! \n";
+    logI << "Stream CLOSE CB!!! \n";
     stream = createRawStream(streamer);
     stream->setCloseStreamCallback(closeCB);
   };

@@ -26,7 +26,7 @@
 #include "NetworkRequestSettings.h"
 #include "common/CryptoHelper.h"
 #include "Server.h"
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 
 
 #endif //BEAST_BOYS_BEASTBOYS_H

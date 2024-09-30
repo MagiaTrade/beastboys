@@ -11,7 +11,7 @@
 #include <boost/asio/ssl.hpp>
 #include <boost/beast.hpp>
 #include <unordered_set>
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 #include "Stream.h"
 
 namespace bb {

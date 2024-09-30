@@ -11,7 +11,7 @@ void errorCallback(const mgutils::ErrorInfo& error)
       << " | Error Message: " << error.errorMessage
       << " | File: " << error.file << "(" << error.line << ")";
 
-  LOG_ERROR(stm.str());
+  logE << (stm.str());
 }
 
 void infoCallback(const mgutils::ErrorInfo& error)
@@ -21,7 +21,7 @@ void infoCallback(const mgutils::ErrorInfo& error)
       << " | Error Message: " << error.errorMessage
       << " | File: " << error.file << "(" << error.line << ")";
 
-  LOG_INFO(stm.str());
+  logI << (stm.str());
 }
 
 void handleServerMessages(bb::network::server::Server& server, const std::string& message)

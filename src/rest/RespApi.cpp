@@ -5,7 +5,7 @@
 #include "RestApi.h"
 #include "BoostInternalImpl.h"
 #include <boost/asio.hpp>
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 
 #ifdef __APPLE__
   #include <pthread.h>
@@ -34,7 +34,7 @@ namespace bb::network::rest
         _worker.join();
     }
 
-    lg(mgutils::Debug) << "Destructor RestApi\n";
+    logD << "Destructor RestApi\n";
   }
 
   void RestApi::startAsyncContext()
@@ -128,7 +128,7 @@ namespace bb::network::rest
 
       if (ec != 0)
       {
-        lg(mgutils::Error) << fl << " - Error message: " << errmsg;
+        logE << fl << " - Error message: " << errmsg;
       } else
       {
         validateResponse(http_result_code, response);

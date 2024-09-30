@@ -38,12 +38,12 @@ TEST_CASE("WebSocket Messaging Tests", "[websocket]")
       {
        if (!success)
        {
-         LOG_ERROR("Stream closed with msg: " + data);
+         logE << ("Stream closed with msg: " + data);
          return;
        }
 
        // Work with your streamed data here
-       LOG_INFO(data);
+        logI << data;
       });
 
       std::this_thread::sleep_for(std::chrono::seconds(1)); // time to stream be opened
@@ -85,7 +85,7 @@ TEST_CASE("WebSocket Messaging Tests", "[websocket]")
         }
         else
         {
-          LOG_ERROR("Timeout waiting for sendMessage callback.");
+          logE << ("Timeout waiting for sendMessage callback.");
           REQUIRE(false); // Force test failure on timeout
         }
 
@@ -96,22 +96,22 @@ TEST_CASE("WebSocket Messaging Tests", "[websocket]")
           REQUIRE(receivedMsg == testMessage);
         } else
         {
-          LOG_ERROR("Timeout waiting for getting message received on server's callback.");
+          logE << ("Timeout waiting for getting message received on server's callback.");
           REQUIRE(false); // Force test failure on timeout
         }
       }
       else
       {
-        LOG_ERROR("Failed to lock stream.");
+        logE << ("Failed to lock stream.");
         REQUIRE(false); // Force test failure if stream is not valid
       }
     } catch (const std::exception& e)
     {
-      LOG_ERROR("Exception caught: " + std::string(e.what()));
+      logE << ("Exception caught: " + std::string(e.what()));
       REQUIRE(false); // Force test failure on exception
     } catch (...)
     {
-      LOG_ERROR("Unknown exception caught");
+      logE << ("Unknown exception caught");
       REQUIRE(false); // Force test failure on unknown exception
     }
   }
@@ -128,10 +128,10 @@ TEST_CASE("WebSocket Messaging Tests", "[websocket]")
       [&](bool success, const std::string& data, const auto& stream) {
         if (!success)
         {
-          LOG_ERROR("Stream closed with msg: " + data);
+          logE << ("Stream closed with msg: " + data);
           return;
         }
-        LOG_INFO("Stream: " + data);
+        logI << "Stream: " + data;
         sendMsgPromise.set_value(data);
       });
 
@@ -152,22 +152,22 @@ TEST_CASE("WebSocket Messaging Tests", "[websocket]")
         }
         else
         {
-          LOG_ERROR("Timeout waiting for getting message received on server's callback.");
+          logE << ("Timeout waiting for getting message received on server's callback.");
           REQUIRE(false); // Force test failure on timeout
         }
       }
       else
       {
-        LOG_ERROR("Failed to lock stream.");
+        logE << ("Failed to lock stream.");
         REQUIRE(false); // Force test failure if stream is not valid
       }
     } catch (const std::exception& e)
     {
-      LOG_ERROR("Exception caught: " + std::string(e.what()));
+      logE << ("Exception caught: " + std::string(e.what()));
       REQUIRE(false); // Force test failure on exception
     } catch (...)
     {
-      LOG_ERROR("Unknown exception caught");
+      logE << ("Unknown exception caught");
       REQUIRE(false); // Force test failure on unknown exception
     }
   }

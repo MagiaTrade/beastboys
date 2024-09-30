@@ -63,7 +63,7 @@ namespace bb::network::ws
     _sslContext.add_certificate_authority(
         boost::asio::buffer(cacert_data, std::strlen(cacert_data)), ec);
     if (ec) {
-      lg(mgutils::Error) << "Error adding certificate authority: " << ec.message();
+      logE<< "Error adding certificate authority: " << ec.message();
       return;
     }
 
@@ -146,7 +146,7 @@ namespace bb::network::ws
       if(_worker.joinable())
           _worker.join();
 
-      lg(mgutils::Debug) << "Destructor WebSocketImpl\n";
+      logD << "Destructor WebSocketImpl\n";
   }
 
 }

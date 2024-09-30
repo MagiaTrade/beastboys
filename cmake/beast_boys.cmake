@@ -35,7 +35,7 @@ set(BEAST_BOYS_HEADERS
   ${CMAKE_CURRENT_SOURCE_DIR}/include/server/websocket/HttpListener.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/server/websocket/HandShaker.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/server/websocket/WSConnection.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/common/Logger.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/common/ErrorHelper.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/common/CryptoHelper.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/rest/RestApi.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/rest/common/NetworkRequestSettings.h

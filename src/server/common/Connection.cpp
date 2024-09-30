@@ -4,7 +4,7 @@
 //
 #include "Connection.h"
 #include "ServerState.h"
-//#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 //
 //#define BUFFER_SIZE 2048
 //
@@ -38,7 +38,7 @@ namespace bb::network::server
 //
 //      std::stringstream stm;
 //      stm << "Bytes: " << bytes << " Msg: " << msg;
-//      LOG_INFO(stm.str());
+//      logI << (stm.str());
 //
 //      _buffer.consume(bytes);
 //      _serverState->send(msg);

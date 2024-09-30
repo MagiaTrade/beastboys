@@ -5,7 +5,7 @@
 #include "RawDoorman.h"
 #include "ServerState.h"
 #include "RSConnection.h"
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 
 namespace bb::network::server::rs
 {
@@ -15,7 +15,7 @@ namespace bb::network::server::rs
     {
       std::make_shared<bb::network::server::rs::RSConnection>(std::move(_sock), _serverState)->run();
     } else {
-      lg(mgutils::Error) << "Error: " << ec.value() << " Msg: " << ec.message();
+      logE << "Error: " << ec.value() << " Msg: " << ec.message();
     }
     run();
   }

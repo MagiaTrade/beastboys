@@ -5,7 +5,7 @@
 #include "WebSocketDoorman.h"
 #include "ServerState.h"
 #include "HttpListener.h"
-#include "common/Logger.h"
+#include "common/ErrorHelper.h"
 
 namespace bb::network::server::ws
 {
@@ -15,7 +15,7 @@ namespace bb::network::server::ws
       std::make_shared<HttpListener>(std::move(_sock), _serverState)->run();
     }
     else{
-      lg(mgutils::Error)<< "Error: " << ec.value() << " Msg: " << ec.message();
+      logE << "Error: " << ec.value() << " Msg: " << ec.message();
     }
 
     run();

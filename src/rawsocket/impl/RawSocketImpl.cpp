@@ -121,7 +121,7 @@ RawSocketImpl::~RawSocketImpl(){
   if(_worker.joinable())
       _worker.join();
 
-  lg(mgutils::Debug) << "Destructor RawSocketImpl\n";
+  logD << "Destructor RawSocketImpl";
 }
 
 }
