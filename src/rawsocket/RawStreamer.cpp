@@ -9,7 +9,7 @@
 namespace bb{
 
 RawStreamer::RawStreamer(){
-  _impl = std::make_shared<network::rs::RawSocketImpl>();
+  _impl = bb::network::rs::RawSocketImpl::create();
 }
 
 std::weak_ptr<network::rs::Stream>  RawStreamer::openStream(std::string baseUrl,

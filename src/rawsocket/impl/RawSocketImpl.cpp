@@ -2,8 +2,11 @@
 // Created by Arthur Motelevicz on 01/03/23.
 //
 
-#include "RawSocketImpl.h"
 #include <iostream>
+#include <memory>
+#include <optional>
+
+#include "RawSocketImpl.h"
 #include "RawSharedState.h"
 #include "RawStream.h"
 #include "RawResolver.h"
@@ -20,27 +23,39 @@ using namespace boost;
 
   RawSocketImpl::RawSocketImpl()
   {
+    _workGuard = std::make_unique<boost::asio::executor_work_guard<boost::asio::io_context::executor_type>>(_ioc.get_executor());
     _sharedState = std::make_shared<SharedState>();
-    startContext();
+}
+
+std::shared_ptr<RawSocketImpl> RawSocketImpl::create()
+{
+  auto instance = std::shared_ptr<RawSocketImpl>(new RawSocketImpl());
+  instance->initialize();
+  return instance;
+}
+
+void RawSocketImpl::initialize()
+{
+  startContext();
 }
 
 void RawSocketImpl::startContext()
 {
-  _work = std::make_shared<boost::asio::io_context::work>(_ioc);
-  _worker = std::thread([&]()
+  auto self = shared_from_this();
+  _worker = std::thread([self]()
   {
-
 #ifdef __APPLE__
     pthread_setname_np("RawSockApi-Worker");
 #endif
 
-    while(!_destructorCalled) {
+    while(!self->_stopWorker)
+    {
       try {
-        _ioc.run();
+          self->_ioc.run_one();
       }
       catch (const boost::system::system_error &e) {
         REPORT_ASIO_ERROR_(e.code())
-        restartContext();
+        self->restartContext();
       }
     }
   });
@@ -48,9 +63,9 @@ void RawSocketImpl::startContext()
 
 
 void RawSocketImpl::restartContext(){
-    _work.reset();
+    _workGuard.reset();
     _ioc.restart();
-    startContext();
+    _workGuard = std::make_unique<boost::asio::executor_work_guard<boost::asio::io_context::executor_type>>(_ioc.get_executor());
 }
 
 std::weak_ptr<Stream>  RawSocketImpl::openStream(std::string baseUrl,
@@ -115,13 +130,19 @@ std::weak_ptr<Stream>  RawSocketImpl::openStream(std::string baseUrl,
   }
 
 RawSocketImpl::~RawSocketImpl(){
-  _destructorCalled = true;
+  _stopWorker = true;
+  _workGuard.reset();
   _ioc.stop();
-  _work.reset();
   if(_worker.joinable())
+  {
+    if (std::this_thread::get_id() != _worker.get_id()) {
       _worker.join();
+    } else {
+      logE << "[RawSocketImpl] Attempted to join worker thread from within itself.";
+    }
+  }
 
-  logD << "Destructor RawSocketImpl";
+  logT << "Destructor RawSocketImpl";
 }
 
 }
