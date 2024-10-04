@@ -72,7 +72,8 @@ namespace bb::network::server::rs
   void RSConnection::onWrite(boost::system::error_code ec, std::size_t bytes)
   {
     RETURN_IF_ASIO_ERROR_(ec)
-    _messageQueue.erase(_messageQueue.begin());
+    if(_messageQueue.size() > 0)
+      _messageQueue.erase(_messageQueue.begin());
 
     if (!_messageQueue.empty())
     {
