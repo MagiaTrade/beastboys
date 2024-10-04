@@ -28,7 +28,6 @@ namespace bb::network::server::ws
       std::string message = boost::beast::buffers_to_string(_buffer.data());
       logI << message;
       _buffer.consume(bytes);
-      _serverState->send(message);
     }
 
     callAsyncRead();

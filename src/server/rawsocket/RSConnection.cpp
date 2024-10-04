@@ -37,7 +37,7 @@ namespace bb::network::server::rs
       logI << stm.str();
 
       _buffer.consume(bytes);
-      _serverState->send(msg);
+      _serverState->onReceive(this, msg);
     }
 
     callAsyncRead();

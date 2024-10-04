@@ -32,6 +32,12 @@ namespace bb::network::server
       if(_onSendMessageCb)
         _serverState->setOnSendMessageCB(_onSendMessageCb);
 
+      if(_onClientJoinCallback)
+        _serverState->setOnClientJoinCallback(_onClientJoinCallback);
+
+      if(_onClientSentCallback)
+        _serverState->setOnClientSentCallback(_onClientSentCallback);
+
       _doorMan = std::make_shared<DOORMAN_TYPE>(_ioc, _endpoint, _serverState);
       _doorMan->run();
       _ioc.run();
@@ -40,9 +46,15 @@ namespace bb::network::server
     void stop();
     void disconnectAll();
     void broadcast(const std::string& message) const;
+    void sendTo(const std::shared_ptr<Client>& client, const std::string &message);
     void setOnSendMessageCB(const OnSendMessageCallback& cb);
+    void setOnClientJoinCB(const OnClientJoinCallback & cb);
+    void setOnClientSentCallback(const OnClientSentCallback& cb);
+
   private:
     OnSendMessageCallback _onSendMessageCb{nullptr};
+    OnClientJoinCallback _onClientJoinCallback{nullptr};
+    OnClientSentCallback _onClientSentCallback{nullptr};
     std::shared_ptr<ServerState> _serverState{nullptr};
     std::shared_ptr<Doorman> _doorMan{nullptr};
     boost::asio::io_context _ioc;

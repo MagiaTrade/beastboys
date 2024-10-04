@@ -13,6 +13,8 @@ namespace bb::network::server
   {
     auto client = std::make_shared<Client>(connection);
     _clients.push_back(client);
+    if(_onClientJoinCallback)
+      _onClientJoinCallback(client);
     return client;
   }
 
@@ -30,9 +32,11 @@ namespace bb::network::server
   {
     for (const auto &c: _clients)
       c->getConnection()->send(message);
+  }
 
-    if(_onSendMessageCb)
-      _onSendMessageCb(message);
+  void ServerState::sendTo(const std::shared_ptr<Client>& client, const std::string &message)
+  {
+    client->getConnection()->send(message);
   }
 
   void ServerState::leaveAll()
@@ -48,10 +52,36 @@ namespace bb::network::server
     _onSendMessageCb = cb;
   }
 
+  void ServerState::setOnClientJoinCallback(const OnClientJoinCallback& cb)
+  {
+    _onClientJoinCallback = cb;
+  }
+
+  void ServerState::setOnClientSentCallback(const OnClientSentCallback& cb)
+  {
+    _onClientSentCallback = cb;
+  }
+
   ServerState::~ServerState()
   {
     if(!_clients.empty())
       logE << "Clients not empty on ServerState destructor!";
   }
 
+  void ServerState::onReceive(Connection * connection, const std::string &message)
+  {
+    auto it = std::find_if(_clients.begin(), _clients.end(),
+                               [connection](const std::shared_ptr<Client>& client)
+    {
+       return connection == client->getConnection();
+    });
+
+    if(it != _clients.end())
+    {
+      if(_onClientSentCallback)
+        _onClientSentCallback(*it, message);
+    }
+    else
+      assert(false && "Client not found!");
+  }
 }

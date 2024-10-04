@@ -33,8 +33,28 @@ namespace bb::network::server
       _serverState->setOnSendMessageCB(_onSendMessageCb);
   }
 
+  void Server::setOnClientJoinCB(const OnClientJoinCallback & cb)
+  {
+    _onClientJoinCallback = cb;
+    if(_serverState)
+      _serverState->setOnClientJoinCallback(_onClientJoinCallback);
+  }
+
+  void Server::setOnClientSentCallback(const OnClientSentCallback& cb)
+  {
+    _onClientSentCallback = cb;
+    if(_serverState)
+      _serverState->setOnClientSentCallback(_onClientSentCallback);
+  }
+
   void Server::broadcast(const std::string& message) const
   {
     _serverState->send(message);
   }
+
+  void Server::sendTo(const std::shared_ptr<Client>& client, const std::string &message)
+  {
+    _serverState->sendTo(client, message);
+  }
+
 }
