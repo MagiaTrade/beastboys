@@ -101,8 +101,8 @@ void Stream::connectionAborted(boost::system::error_code ec){
 void Stream::internalStop(){
     if(_usesSSL){
         if(_socketSSL->is_open()) {
-            _socketSSL->async_close(boost::beast::websocket::close_code::normal, [&](boost::system::error_code ec) {
-                if(_wasClosedByServer) return;
+            _socketSSL->async_close(boost::beast::websocket::close_code::normal, [self = shared_from_this()](boost::system::error_code ec) {
+                if(self->_wasClosedByServer) return;
               logI << "Stream " << id << " stopped by user!\n";
             });
         }
@@ -111,8 +111,8 @@ void Stream::internalStop(){
     }
 
     if(_socket->is_open()) {
-        _socket->async_close(boost::beast::websocket::close_code::normal, [&](boost::system::error_code ec) {
-            if(_wasClosedByServer) return;
+        _socket->async_close(boost::beast::websocket::close_code::normal, [self = shared_from_this()](boost::system::error_code ec) {
+            if(self->_wasClosedByServer) return;
           logI << "Stream " << id << " stopped by user!\n";
         });
     }
@@ -131,7 +131,7 @@ void Stream::stopWithCloseCallbackTriggered() {
 
 void Stream::ping(const std::string& payload) {
 
-    auto pingCb = [&](boost::system::error_code ec) {
+    auto pingCb = [](boost::system::error_code ec) {
         REPORT_ASIO_ERROR_(ec)
     };
 
@@ -143,32 +143,32 @@ void Stream::ping(const std::string& payload) {
 }
 
 Stream::~Stream(){
-  logD << "Destructor stream ID: (" << getId() << ")";
+  logI << "Destructor stream ID: (" << getId() << ") [ "<< this << "]";
 }
 
 void Stream::setWatchControlMessages() {
 
-    auto controlCB = [&](boost::beast::websocket::frame_type kind, boost::string_view payload) {
+    auto controlCB = [self = shared_from_this()](boost::beast::websocket::frame_type kind, boost::string_view payload) {
         switch (kind) {
             case boost::beast::websocket::frame_type::ping: {
 //                    std::cout << "Ping message received! Payload: " << payload << "\n";
-                if (_pingStreamCB)
-                    _pingStreamCB(shared_from_this());
+                if (self->_pingStreamCB)
+                  self->_pingStreamCB(self);
                 return;
             }
             case boost::beast::websocket::frame_type::pong: {
 //                    std::cout << "Pong message received! Payload: " << payload << "\n";
-                if (_pongStreamCB)
-                    _pongStreamCB(shared_from_this());
+                if (self->_pongStreamCB)
+                  self->_pongStreamCB(self);
                 return;
             }
             case boost::beast::websocket::frame_type::close: {
                 //first flag to not call the client normal callback when shutting down
-                _wasClosedByServer = true;
+              self->_wasClosedByServer = true;
                 //now stop it
-                internalStop();
-                if (_closeStreamCB)
-                    _closeStreamCB(shared_from_this());
+              self->internalStop();
+                if (self->_closeStreamCB)
+                  self->_closeStreamCB(self);
 
                 return;
             }

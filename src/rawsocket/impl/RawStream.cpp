@@ -104,20 +104,20 @@ void Stream::internalStop(const FinishCallback& cb)
 //    });
 
     boost::asio::post(_socket->get_executor(),
-    [this, cb]()
+    [self = shared_from_this(), cb]()
     {
       boost::system::error_code ec;
 
       // Shutdown the socket to disallow further sends and receives
-      _socket->shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+      self->_socket->shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
 
       RETURN_IF_ASIO_ERROR_(ec)
 
-      _socket->close(ec);
+      self->_socket->close(ec);
 
       RETURN_IF_ASIO_ERROR_(ec)
 
-      if(_wasClosedByServer)
+      if(self->_wasClosedByServer)
         return;
 
       logI << "Stream " << id << " stopped by user!";
@@ -150,7 +150,7 @@ void Stream::stopWithCloseCallbackTriggered() {
 
 Stream::~Stream()
 {
-  logI << "Destructor stream ID: (" << getId() << ")";
+  logI << "Destructor stream ID: (" << getId() << ") [ "<< this << "]";
 }
 
 
