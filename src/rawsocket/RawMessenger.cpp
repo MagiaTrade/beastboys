@@ -47,7 +47,8 @@ void RawMessenger::startSending()
     if(im.callback)
       im.callback(success);
 
-    _messages.pop();
+    if(!_messages.empty())
+      _messages.pop();
     startSending();
   });
 }
