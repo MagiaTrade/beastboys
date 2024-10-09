@@ -76,10 +76,21 @@ namespace bb::network::server::ws
     callAsyncRead();
   }
 
+  void WSConnection::ping()
+  {
+    _sockStream.ping("");
+  }
+
+
   void WSConnection::disconnect()
   {
-    _sockStream.async_close(boost::beast::websocket::normal,[](boost::system::error_code ec){
-      RETURN_IF_ASIO_ERROR_(ec)
-    });
+//    _sockStream.async_close(boost::beast::websocket::normal,[](boost::system::error_code ec){
+//      RETURN_IF_ASIO_ERROR_(ec)
+//    });
+
+    boost::system::error_code ec;
+    _sockStream.next_layer().shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+    _sockStream.next_layer().close(ec);
+    RETURN_IF_ASIO_ERROR_(ec)
   }
 }

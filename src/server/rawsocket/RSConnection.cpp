@@ -87,6 +87,12 @@ namespace bb::network::server::rs
     callAsyncRead();
   }
 
+
+  void RSConnection::ping()
+  {
+    send("");
+  }
+
   void RSConnection::disconnect()
   {
     boost::asio::post(_socket.get_executor(),

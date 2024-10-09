@@ -57,4 +57,9 @@ namespace bb::network::server
     _serverState->sendTo(client, message);
   }
 
+  void Server::pingAll()
+  {
+    _serverState->pingAll();
+  }
+
 }

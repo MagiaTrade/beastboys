@@ -47,6 +47,7 @@ namespace bb::network::server
     void disconnectAll();
     void broadcast(const std::string& message) const;
     void sendTo(const std::shared_ptr<Client>& client, const std::string &message);
+    void pingAll();
     void setOnSendMessageCB(const OnSendMessageCallback& cb);
     void setOnClientJoinCB(const OnClientJoinCallback & cb);
     void setOnClientSentCallback(const OnClientSentCallback& cb);

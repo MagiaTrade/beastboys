@@ -23,6 +23,7 @@ namespace bb::network::server::rs
     virtual ~RSConnection() = default;
 
     virtual void run() override;
+    virtual void ping() override;
     virtual void send(const std::string& message) override;
     virtual void disconnect() override;
   protected:

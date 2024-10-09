@@ -39,6 +39,12 @@ namespace bb::network::server
     client->getConnection()->send(message);
   }
 
+  void ServerState::pingAll()
+  {
+    for (const auto &c: _clients)
+      c->getConnection()->ping();
+  }
+
   void ServerState::leaveAll()
   {
     for (const auto &c: _clients)

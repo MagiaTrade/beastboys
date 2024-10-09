@@ -150,7 +150,7 @@ void Stream::stopWithCloseCallbackTriggered() {
 
 Stream::~Stream()
 {
-  logI << "Destructor stream!";
+  logI << "Destructor stream ID: (" << getId() << ")";
 }
 
 

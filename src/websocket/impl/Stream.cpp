@@ -143,7 +143,7 @@ void Stream::ping(const std::string& payload) {
 }
 
 Stream::~Stream(){
-  logD << "Destructor stream!";
+  logD << "Destructor stream ID: (" << getId() << ")";
 }
 
 void Stream::setWatchControlMessages() {

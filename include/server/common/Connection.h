@@ -18,6 +18,7 @@ namespace bb::network::server
     virtual ~Connection();
     virtual void run() = 0;
     virtual void send(const std::string& message) = 0;
+    virtual void ping() = 0;
     virtual void disconnect() = 0;
   protected:
     std::shared_ptr<ServerState> _serverState{nullptr};
