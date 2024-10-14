@@ -12,7 +12,8 @@ Receiver::Receiver(std::shared_ptr<SharedState> state, std::shared_ptr<Stream> s
 _sharedState(std::move(state)),
 _stream(std::move(stream))
 {
-    _sharedState->join(_stream.get());
+  logD << "Receiver constructor. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
+  _sharedState->join(_stream.get());
 }
 
 Receiver::~Receiver(){
@@ -20,17 +21,17 @@ Receiver::~Receiver(){
 }
 
 void Receiver::onReceive(boost::system::error_code ec, std::size_t) {
-
-    //return with no error handling if the stream was close by the control messages or by client
-    if(_stream->wasClosedByServer() || _stream->wasClosedByClient())
+  //return with no error handling if the stream was close by the control messages or by client
+  if(_stream->wasClosedByServer() || _stream->wasClosedByClient())
       return;
 
-    if (!ec) {
-        auto msg =  boost::beast::buffers_to_string(_buffer.data());
-        _stream->feedData(msg);
-        _buffer.consume(_buffer.size());
-        run();
-        return;
+    if (!ec)
+    {
+      auto msg =  boost::beast::buffers_to_string(_buffer.data());
+      _stream->feedData(msg);
+      _buffer.consume(_buffer.size());
+      run();
+      return;
     }
 
 //    if (ec == boost::asio::error::operation_aborted || ec == boost::asio::error::eof) {

@@ -88,37 +88,50 @@ bool Stream::usesSSL() const {
     return _usesSSL;
 }
 
-void Stream::feedData(const std::string& data){
-    if(_cb)
-        _cb(true, data, shared_from_this());
+void Stream::feedData(const std::string& data)
+{
+  auto self = shared_from_this();
+  if(_cb)
+      _cb(true, data, std::move(self));
 }
 
-void Stream::connectionAborted(boost::system::error_code ec){
-    if(_cb)
-        _cb(false, ec.message(), shared_from_this());
+void Stream::connectionAborted(boost::system::error_code ec)
+{
+  auto self = shared_from_this();
+  if(_cb)
+        _cb(false, ec.message(), std::move(self));
 }
 
-void Stream::internalStop(){
-    if(_usesSSL){
-        if(_socketSSL->is_open()) {
-            _socketSSL->async_close(boost::beast::websocket::close_code::normal, [self = shared_from_this()](boost::system::error_code ec) {
-                if(self->_wasClosedByServer) return;
-              logI << "Stream " << self->getId() << " stopped by user! Use count: " << self.use_count();
-            });
-        }
+void Stream::internalStop()
+{
+  auto self = shared_from_this();
 
-        return;
+  if(_usesSSL)
+  {
+    if(_socketSSL->is_open())
+    {
+      _socketSSL->async_close(boost::beast::websocket::close_code::normal, [self = std::move(self)](boost::system::error_code ec)
+      {
+        if(self->_wasClosedByServer) return;
+        logI << "Stream " << self->getId() << " stopped by user! Use count: " << self.use_count();
+      });
     }
 
-    if(_socket->is_open()) {
-        _socket->async_close(boost::beast::websocket::close_code::normal, [self = shared_from_this()](boost::system::error_code ec) {
-            if(self->_wasClosedByServer) return;
-          logI << "Stream " << self->getId() << " stopped by user! Use count: " << self.use_count();;
-        });
+    return;
+  }
+
+    if(_socket->is_open())
+    {
+      _socket->async_close(boost::beast::websocket::close_code::normal, [self = std::move(self)](boost::system::error_code ec)
+      {
+        if(self->_wasClosedByServer) return;
+        logI << "Stream " << self->getId() << " stopped by user! Use count: " << self.use_count();;
+      });
     }
 }
 
-void Stream::stop() {
+void Stream::stop()
+{
     _wasClosedByClient = true;
     internalStop();
 }
@@ -146,9 +159,8 @@ Stream::~Stream(){
   logI << "Destructor stream ID: (" << getId() << ") [ "<< this << "]";
 }
 
-void Stream::setWatchControlMessages() {
-
-
+void Stream::setWatchControlMessages()
+{
   auto controlCB = [weakSelf = weak_from_this()](boost::beast::websocket::frame_type kind, boost::string_view payload)
   {
     auto self = weakSelf.lock();
@@ -157,7 +169,8 @@ void Stream::setWatchControlMessages() {
 
       switch (kind)
       {
-        case boost::beast::websocket::frame_type::ping: {
+        case boost::beast::websocket::frame_type::ping:
+        {
 //                    std::cout << "Ping message received! Payload: " << payload << "\n";
             if (self->_pingStreamCB)
               self->_pingStreamCB(self);
@@ -178,7 +191,6 @@ void Stream::setWatchControlMessages() {
           self->internalStop();
             if (self->_closeStreamCB)
               self->_closeStreamCB(self);
-
             return;
         }
       }
