@@ -15,6 +15,7 @@ _sharedState(std::move(state)),
 _stream(std::move(stream))
 {
   _sharedState->join(_stream.get());
+  logD << "[RawReceiver] Constructor stream ID: " << _stream->getId() << " use count: " << _stream.use_count();
 }
 
 Receiver::~Receiver()
@@ -63,7 +64,8 @@ void Receiver::onReceive(boost::system::error_code ec, std::size_t bytes)
   REPORT_ASIO_ERROR_(ec)
 }
 
-  void Receiver::run() {
+  void Receiver::run()
+  {
     auto& socket = _stream->getSocket();
     if (socket.is_open())
     {

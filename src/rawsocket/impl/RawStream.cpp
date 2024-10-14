@@ -24,6 +24,8 @@ _readUntilDelimiter(delimiter)
 {
   _id = ++id;
   _socket = std::make_shared<boost::asio::ip::tcp::socket>(ioc);
+
+  logI << "[RawStream] Stream " << _id << " created!";
 }
 
 Stream::Stream(boost::asio::io_context &ioc,
@@ -41,6 +43,7 @@ Stream::Stream(boost::asio::io_context &ioc,
 {
   _id = ++id;
   _socket = std::make_shared<boost::asio::ip::tcp::socket>(ioc);
+  logI << "[RawStream] Stream " << _id << " created!";
 }
 
 uint32_t Stream::getId() const
@@ -70,15 +73,18 @@ boost::asio::ip::tcp::socket& Stream::getSocket()
 
 void Stream::feedData(const std::string& data)
 {
+  auto self = shared_from_this();
   if(_cb)
-    _cb(true, data, shared_from_this());
+    _cb(true, data, std::move(self));
 }
 
 void Stream::feedData(const char* data, size_t length)
 {
+  auto self = shared_from_this();
+
   if(_cb2)
   {
-    _cb2(true, data, length, shared_from_this());
+    _cb2(true, data, length, std::move(self));
     return;
   }
 
@@ -86,12 +92,13 @@ void Stream::feedData(const char* data, size_t length)
 }
 
 
-void Stream::connectionAborted(boost::system::error_code ec){
+void Stream::connectionAborted(boost::system::error_code ec)
+{
+  auto self = shared_from_this();
   if(_cb)
-    _cb(false, ec.message(), shared_from_this());
-
-  if(_cb2)
-    _cb2(false, ec.message().data(), ec.message().size(), shared_from_this());
+    _cb(false, ec.message(), std::move(self));
+  else if(_cb2)
+    _cb2(false, ec.message().data(), ec.message().size(), std::move(self));
 }
 
 void Stream::internalStop(const FinishCallback& cb)
@@ -100,7 +107,7 @@ void Stream::internalStop(const FinishCallback& cb)
   {
 //    _socket->async_close(boost::beast::websocket::close_code::normal, [&](boost::system::error_code ec) {
 //        if(_wasClosedByServer) return;
-//        logI << "Stream " << id << " stopped by user!\n";
+//        logI << "[RawStream] Stream " << id << " stopped by user!\n";
 //    });
 
     boost::asio::post(_socket->get_executor(),
@@ -120,7 +127,7 @@ void Stream::internalStop(const FinishCallback& cb)
       if(self->_wasClosedByServer)
         return;
 
-      logI << "Stream " << id << " stopped by user!";
+      logI << "[RawStream] Stream " << self->getId() << " stopped by user!";
 
       if(cb)
         cb();
@@ -133,10 +140,12 @@ void Stream::stop(const FinishCallback& cb) {
   internalStop(cb);
 }
 
-void Stream::stopWithCloseCallbackTriggered() {
+void Stream::stopWithCloseCallbackTriggered()
+{
+  auto self = shared_from_this();
   stop();
   if(_closeStreamCB)
-    _closeStreamCB(shared_from_this());
+    _closeStreamCB(std::move(self));
 }
 
 //void Stream::ping(const std::string& payload) {
@@ -150,7 +159,7 @@ void Stream::stopWithCloseCallbackTriggered() {
 
 Stream::~Stream()
 {
-  logI << "Destructor stream ID: (" << getId() << ") [ "<< this << "]";
+  logI << "[RawStream] Destructor stream ID: (" << getId() << ") [ "<< this << "]";
 }
 
 

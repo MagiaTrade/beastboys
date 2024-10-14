@@ -14,24 +14,31 @@ _sharedState(std::move(state)),
 _stream(std::move(stream)),
 _resolver(ioc)
 {
-
+  logD << "[RawResolver] Constructor stream ID: " << _stream->getId() << " use count: " << _stream.use_count();
 }
 
-void Resolver::onResolve(boost::system::error_code ec, boost::asio::ip::tcp::resolver::results_type res){
-    if(ec){
-        _stream->connectionAborted(ec);
-        REPORT_ASIO_ERROR_(ec)
-        return;
-    }
-    std::make_shared<Connector>(std::move(_sharedState), std::move(_stream))->run(std::move(res));
+void Resolver::onResolve(boost::system::error_code ec, boost::asio::ip::tcp::resolver::results_type res)
+{
+  logD << "[RawResolver] onResolve stream ID: " << _stream->getId() << " use count: " << _stream.use_count();
+
+  if(ec)
+  {
+    _stream->connectionAborted(ec);
+    REPORT_ASIO_ERROR_(ec)
+    return;
+  }
+
+  std::make_shared<Connector>(std::move(_sharedState), std::move(_stream))->run(std::move(res));
 }
 
 
-void Resolver::run(){
-    _resolver.async_resolve(_stream->host(),
-                            _stream->port(),
-    [self = shared_from_this()](boost::system::error_code ec,
-                                boost::asio::ip::tcp::resolver::results_type res)
+void Resolver::run()
+{
+  _resolver.async_resolve(_stream->host(),
+                          _stream->port(),
+  [self = shared_from_this()](
+    boost::system::error_code ec,
+    boost::asio::ip::tcp::resolver::results_type res)
     {
         self->onResolve(ec, std::move(res));
     });

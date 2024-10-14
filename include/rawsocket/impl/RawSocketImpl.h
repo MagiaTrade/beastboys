@@ -39,7 +39,6 @@ public:
     std::shared_ptr<SharedState> _sharedState{nullptr};
     std::thread _worker;
     std::unique_ptr<boost::asio::executor_work_guard<boost::asio::io_context::executor_type>> _workGuard;
-//  boost::asio::executor_work_guard<boost::asio::io_context::executor_type> _workGuard;
     std::atomic<bool> _stopWorker{false};
 
   static std::shared_ptr<RawSocketImpl> create();

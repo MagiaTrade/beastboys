@@ -13,12 +13,13 @@ Connector::Connector(std::shared_ptr<SharedState> state, std::shared_ptr<Stream>
 _sharedState(std::move(state)),
 _stream(std::move(stream))
 {
-
+  logD << "[RawConnector] Constructor stream ID: " << _stream->getId() << " use count: " << _stream.use_count();
 }
 
-void Connector::onConnect(boost::system::error_code ec, boost::asio::ip::tcp::resolver::iterator){
-
-    if(ec){
+void Connector::onConnect(boost::system::error_code ec, boost::asio::ip::tcp::resolver::iterator)
+{
+  logD << "[RawConnector] onConnect stream ID: " << _stream->getId() << " use count: " << _stream.use_count();
+  if(ec){
         _stream->connectionAborted(ec);
         REPORT_ASIO_ERROR_(ec)
         return;
@@ -27,8 +28,8 @@ void Connector::onConnect(boost::system::error_code ec, boost::asio::ip::tcp::re
     std::make_shared<Receiver>(std::move(_sharedState), std::move(_stream))->run();
 }
 
-void Connector::run(const boost::asio::ip::tcp::resolver::results_type& results){
-
+void Connector::run(boost::asio::ip::tcp::resolver::results_type results)
+{
     boost::asio::async_connect(_stream->getSocket(),
                                results.begin(),
                                results.end(),
