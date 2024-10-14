@@ -14,11 +14,19 @@ _sharedState(std::move(state)),
 _stream(std::move(stream)),
 _resolver(ioc)
 {
-
+  logD << "Resolver constructor. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
 }
 
+Resolver::~Resolver()
+{
+  if(_stream)
+    logD << "Resolver destructor. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
+}
+
+
 void Resolver::onResolve(boost::system::error_code ec, const boost::asio::ip::tcp::resolver::results_type& res){
-    if(ec)
+  logD << "Resolver onResolve. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
+  if(ec)
     {
       _stream->connectionAborted(ec);
       RETURN_IF_ASIO_ERROR_(ec)

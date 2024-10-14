@@ -13,11 +13,13 @@ SSLHandShaker::SSLHandShaker(std::shared_ptr<SharedState> state, std::shared_ptr
 _sharedState(std::move(state)),
 _stream(std::move(stream))
 {
-
+  logD << "SSLHandShaker constructor. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
 }
 
 void SSLHandShaker::onHandShake(boost::system::error_code ec) {
-    if(ec){
+  logD << "SSLHandShaker onHandShake. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
+
+  if(ec){
         _stream->connectionAborted(ec);
         REPORT_ASIO_ERROR_(ec)
         return;

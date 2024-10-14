@@ -15,20 +15,30 @@ Connector::Connector(std::shared_ptr<SharedState> state, std::shared_ptr<Stream>
 _sharedState(std::move(state)),
 _stream(std::move(stream))
 {
-
+  logD << "Connector constructor. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
 }
 
-void Connector::onConnect(boost::system::error_code ec, boost::asio::ip::tcp::resolver::iterator){
+Connector::~Connector()
+{
+  if(_stream)
+    logD << "Connector destructor. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
+}
 
-    if(ec){
+void Connector::onConnect(boost::system::error_code ec, boost::asio::ip::tcp::resolver::iterator)
+{
+  logD << "Connector onConnect. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
+
+  if(ec){
         _stream->connectionAborted(ec);
         REPORT_ASIO_ERROR_(ec)
         return;
     }
 
-    _stream->setWatchControlMessages();
+  _stream->setWatchControlMessages();
 
-    if(_stream->usesSSL()){
+  logD << "Connector afterWatchControl called. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
+
+  if(_stream->usesSSL()){
         if (!SSL_set_tlsext_host_name(_stream->getSocketSSL().next_layer().native_handle(), _stream->host().c_str())) {
             auto error_code = boost::beast::error_code(
                     static_cast<int>(::ERR_get_error()), boost::asio::error::get_ssl_category()

@@ -9,43 +9,49 @@ int main()
 {
     std::shared_ptr<bb::Streamer> streamer(new bb::Streamer());
 
-    auto stream = streamer->openStream("stream.binance.com","9443","/ws/btcusdt@kline_1s", true,
+    std::weak_ptr<bb::network::ws::Stream> stream = streamer->openStream("stream.binance.com","9443","/ws/btcusdt@kline_1s", true,
     [](bool success, const std::string& data, auto stream){
         if(!success)
         {
           logI << "Stream1 closed with msg: " << data;
             return;
         }
-
-        //Work with your streamed data here
+      logW << "Stream active: " << stream->getId() << " Use count: " << stream.use_count();
+      //Work with your streamed data here
       logI << data;
     });
+
+    if(auto sharedStream = stream.lock())
+      logW << "Stream requested: " << sharedStream->getId() << " Use count: " << sharedStream.use_count();
 
 
     bool sent = false;
     auto messenger  = std::make_unique<bb::Messenger>();
+  std::string input;
 
-    while(stream.lock())
+    while(input != "q")
     {
-        // Do other stuff while the data is coming in callback
-        std::this_thread::sleep_for(std::chrono::seconds(3));
-//        logI << "\nWorking.. ";
+      std::getline(std::cin,input);
 
+      if(input == "subs" && !sent)
+      {
+          messenger->sendMessage(stream.lock(),
+           "{\n\"method\": \"SUBSCRIBE\",\n\"params\":\n[\n\"btcusdt@trade\"\n],\n\"id\": 1\n}",
+           [](bool success)
+           {
+             if (success)
+               logI << "Msg enviada com sucesso!";
+               else
+               logE << "Msg nao enviada!";
+           });
 
-        if(!sent)
-        {
-            messenger->sendMessage(stream.lock(),
-             "{\n\"method\": \"SUBSCRIBE\",\n\"params\":\n[\n\"btcusdt@trade\"\n],\n\"id\": 1\n}",
-             [](bool success)
-             {
-               if (success)
-                 logI << "Msg enviada com sucesso!";
-                 else
-                 logE << "Msg nao enviada!";
-             });
-
-            sent = true;
-        }
+          sent = true;
+      }
+      //close stream
+      else if(input == "k")
+      {
+        stream.lock()->stop();
+      }
 
     }
 

@@ -13,43 +13,46 @@ TargetHandShaker::TargetHandShaker(std::shared_ptr<SharedState> state, std::shar
 _sharedState(std::move(state)),
 _stream(std::move(stream))
 {
-
+  logD << "TargetHandShaker constructor. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
 }
 
-void TargetHandShaker::onHandShake(boost::system::error_code ec) {
+void TargetHandShaker::onHandShake(boost::system::error_code ec)
+{
+  logD << "TargetHandShaker onHandShake. Stream id: " << _stream->getId() << " Use count: " << _stream.use_count();
 
-    if(ec){
-        _stream->connectionAborted(ec);
-        REPORT_ASIO_ERROR_(ec)
-        return;
-    }
+  if(ec){
+    _stream->connectionAborted(ec);
+    REPORT_ASIO_ERROR_(ec)
+    return;
+  }
 
-    std::make_shared<Receiver>(std::move(_sharedState), std::move(_stream))->run();
+  std::make_shared<Receiver>(std::move(_sharedState), std::move(_stream))->run();
 }
 
 
-void TargetHandShaker::run(){
-
-    if(_stream->usesSSL()) {
-        _stream->getSocketSSL().async_handshake(
-                _stream->host(),
-                _stream->target(),
-                [self = shared_from_this()](boost::system::error_code ec) {
-                    self->onHandShake(ec);
-                }
-        );
-
-        return;
-    }
-
-    _stream->getSocket().async_handshake(
-            _stream->host(),
-            _stream->target(),
-            [self = shared_from_this()](boost::system::error_code ec) {
-                self->onHandShake(ec);
-            }
+void TargetHandShaker::run()
+{
+  if(_stream->usesSSL()) {
+    _stream->getSocketSSL().async_handshake(
+      _stream->host(),
+      _stream->target(),
+      [self = shared_from_this()](boost::system::error_code ec)
+      {
+        self->onHandShake(ec);
+      }
     );
 
+    return;
+  }
+
+  _stream->getSocket().async_handshake(
+    _stream->host(),
+    _stream->target(),
+    [self = shared_from_this()](boost::system::error_code ec)
+    {
+      self->onHandShake(ec);
+    }
+  );
 }
 
 }
